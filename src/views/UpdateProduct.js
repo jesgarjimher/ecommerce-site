@@ -1,10 +1,16 @@
+import Headers from "./Header"
+
 
 function UpdateProduct() {
 
     return(
-        <div>
-            <h1>Update product</h1>
-        </div>
+        <>
+            <Headers/>
+            <div>
+                <h1>Update product</h1>
+            </div>
+        </>
+        
     )
 }
 

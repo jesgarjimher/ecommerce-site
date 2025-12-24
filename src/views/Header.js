@@ -11,10 +11,22 @@ function Header() {
                 <Container>
                     <Navbar.Brand href="#home">Navbar</Navbar.Brand>
                     <Nav className="me-auto navbar_wrapper">
-                        <Link to="/addproduct">Add Product</Link>
-                        <Link to="/updateproduct">Update Product</Link>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
+                        {
+                            localStorage.getItem("user-info") ?
+                            <>
+                                <Link to="/addproduct">Add Product</Link>
+                                <Link to="/updateproduct">Update Product</Link>
+                            </>
+                            :
+                            <>
+                                <Link to="/login">Login</Link>
+                                <Link to="/register">Register</Link>
+                            </>
+                             
+                        }
+                        
+                        
+                        
                     </Nav>
                 </Container>
             </Navbar>

@@ -2,23 +2,24 @@ import Headers from "./Header"
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 
-function Login() {
-
-    const navigate = useNavigate();
+function Protected(props) {
+    let Component = props.component;
     useEffect(() => {
-        if(localStorage.getItem("user-info")) {
-            navigate("/addproduct");
+        if(!localStorage.getItem("user-info")) {
+            navigate("/register")
         }
     })
+
+    const navigate = useNavigate();
+
     return(
         <>
-            <Headers/>
             <div>
-                <h1>Login page</h1>
+                <Component/>
             </div>
         </>
         
     )
 }
 
-export default Login
+export default Protected
