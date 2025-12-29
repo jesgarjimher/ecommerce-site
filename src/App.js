@@ -5,6 +5,7 @@ import Register from "./views/Register"
 import UpdateProduct from './views/UpdateProduct';
 import AddProduct from "./views/AddProduct"
 import Protected from "./views/Protected"
+import ProductList from './views/ProductList';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route path="/updateproduct" element={<Protected component={UpdateProduct}/>} />
           
           <Route path="/addproduct" element={<Protected component={AddProduct}/>} />
-          
+          <Route path='/' element={<Protected component={ProductList}/> } />
 
         </Routes>
         
