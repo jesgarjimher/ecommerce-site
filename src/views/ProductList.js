@@ -7,15 +7,27 @@ function ProductList() {
     const [data,setData] = useState([]);
 
     useEffect(() => {
+        renderData();
+    },[])
+
+    async function deleteOperation(id) {
+        let result = await fetch("http://localhost:8000/api/delete/" + id, {
+            method: "DELETE"
+        });
+        result = await result.json();
+        renderData();
+    }
+
+    function renderData() {
         async function fetchResult() {
-            let result = await fetch("http://localhost:8000/api/list");
+             let result = await fetch("http://localhost:8000/api/list");
             result = await result.json();
             setData(result);
         }
-        fetchResult();
-    },[])
+       fetchResult();
+    }
 
-    console.log("Result: ", data)
+
 
     return(
         <>
@@ -30,6 +42,7 @@ function ProductList() {
                             <td>Price</td>
                             <td>Description</td>
                             <td>Image</td>
+                            <td>Operations</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,7 +53,8 @@ function ProductList() {
                                 <td>{item.name}</td>
                                 <td>{item.price}</td>
                                 <td>{item.description}</td>
-                                <td><img className="img-product" src={"http://localhost:8000/storage/" + item.file_path}></img>{}</td>
+                                <td><img className="img-product" src={"http://localhost:8000/storage/" + item.file_path} alt={`Photography of ${item.description}`}></img>{}</td>
+                                <td><button className="btn btn-danger" onClick={() => deleteOperation(item.id)}>Delete</button></td>
                             </tr>
                         )
                         }
