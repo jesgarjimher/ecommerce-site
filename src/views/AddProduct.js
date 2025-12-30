@@ -31,7 +31,7 @@ function AddProduct() {
                 <br></br>
                 <input type="file" className="form-control" onChange={(e)=> setFile(e.target.files[0])} placeholder="file"/>
                 <br></br>
-                <input type="price" className="form-control" onChange={(e) => setPrice(e.target.value)} placeholder="price"/>
+                <input type="text" className="form-control" onChange={(e) => setPrice(e.target.value)} placeholder="price"/>
                 <br></br>
                 <input type="description" className="form-control" onChange={(e) => setDescription(e.target.value)} placeholder="Description"/>
                 <button className="btn btn-primary" onClick={addProduct} >Add Product</button>
