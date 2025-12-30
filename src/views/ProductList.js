@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import Header from "./Header";
 import {Table} from "react-bootstrap"
+import {Link} from "react-router-dom";
 
 function ProductList() {
 
@@ -54,7 +55,10 @@ function ProductList() {
                                 <td>{item.price}</td>
                                 <td>{item.description}</td>
                                 <td><img className="img-product" src={"http://localhost:8000/storage/" + item.file_path} alt={`Photography of ${item.description}`}></img>{}</td>
-                                <td><button className="btn btn-danger" onClick={() => deleteOperation(item.id)}>Delete</button></td>
+                                <td>
+                                    <button className="btn btn-danger" onClick={() => deleteOperation(item.id)}>Delete</button>
+                                    <Link className="btn btn-secondary"  to={"updateproduct/" + item.id}>Edit</Link>
+                                    </td>
                             </tr>
                         )
                         }

@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path='/login' element={<Login/>} />
           <Route path="/register" element={<Register/>} />
-          <Route path="/updateproduct" element={<Protected component={UpdateProduct}/>} />
+          <Route path="/updateproduct/:id" element={<Protected component={UpdateProduct}/>} />
           
           <Route path="/addproduct" element={<Protected component={AddProduct}/>} />
           <Route path='/' element={<Protected component={ProductList}/> } />
