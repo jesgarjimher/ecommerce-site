@@ -55,7 +55,7 @@ function ProductList() {
                                 <td>{item.price}</td>
                                 <td>{item.description}</td>
                                 <td><img className="img-product" src={"http://localhost:8000/storage/" + item.file_path} alt={`Photography of ${item.description}`}></img>{}</td>
-                                <td>
+                                <td className="options-td">
                                     <button className="btn btn-danger" onClick={() => deleteOperation(item.id)}>Delete</button>
                                     <Link className="btn btn-secondary"  to={"updateproduct/" + item.id}>Edit</Link>
                                     </td>

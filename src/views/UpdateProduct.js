@@ -45,7 +45,7 @@ function UpdateProduct() {
     return(
         <>
             <Header/>
-            <div className="col-sm-6 offset-sm-3">
+            <div className="col-sm-4 offset-sm-3 form-update">
                 <h1>Update product</h1>
                 <h2>{data.name}</h2>
                 <input type="text" className="form-control" defaultValue={data.name} onChange={(e) => setName(e.target.value)}/>
