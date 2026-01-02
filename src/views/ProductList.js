@@ -18,12 +18,12 @@ function ProductList() {
         renderData(currentPage);
     },[currentPage])
 
-    async function deleteOperation(id) {
+    async function deleteOperation(id,currentPage) {
         let result = await fetch("http://localhost:8000/api/delete/" + id, {
             method: "DELETE"
         });
         result = await result.json();
-        renderData();
+        renderData(currentPage);
     }
 
     function renderData(page) {
@@ -76,7 +76,7 @@ function ProductList() {
                                 <td>{item.description}</td>
                                 <td><img className="img-product" src={"http://localhost:8000/storage/" + item.file_path} alt={`Photography of ${item.description}`}></img>{}</td>
                                 <td className="options-td">
-                                    <button className="btn btn-danger" onClick={() => deleteOperation(item.id)}>Delete</button>
+                                    <button className="btn btn-danger" onClick={() => deleteOperation(item.id,currentPage)}>Delete</button>
                                     <Link className="btn btn-secondary"  to={"updateproduct/" + item.id}>Edit</Link>
                                     </td>
                             </tr>

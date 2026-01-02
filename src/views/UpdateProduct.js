@@ -1,8 +1,10 @@
 import Header from "./Header"
 import {useParams} from "react-router-dom";
 import {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom"
 
 function UpdateProduct() {
+    const navigate = useNavigate();
     const {id} = useParams();
 
     const [name,setName] = useState("");
@@ -40,6 +42,7 @@ function UpdateProduct() {
             body: formData
         })
         alert("Product has been updated")
+        navigate("/")
     }
 
     return(

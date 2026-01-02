@@ -1,7 +1,11 @@
 import Header from "./Header";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+
 
 function AddProduct() {
+
+    const navigate = useNavigate();
 
     const [name,setName] = useState("");
     const [price,setPrice] = useState("");
@@ -21,6 +25,7 @@ function AddProduct() {
             body: formData
         })
         alert("Data has been saved");
+        navigate("/");
     }
     return(
         <>
