@@ -6,10 +6,17 @@ import {Link} from "react-router-dom";
 function ProductList() {
 
     const [data,setData] = useState([]);
+    const [currentPage,setCurrentpage] = useState(1);
+    const [lastPage, setLastpage] = useState(1);
+
+    const numsPages = [];
+    for(let i = 1; i <= lastPage; i++) {
+        numsPages.push(i);
+    }
 
     useEffect(() => {
-        renderData();
-    },[])
+        renderData(currentPage);
+    },[currentPage])
 
     async function deleteOperation(id) {
         let result = await fetch("http://localhost:8000/api/delete/" + id, {
@@ -19,13 +26,26 @@ function ProductList() {
         renderData();
     }
 
-    function renderData() {
+    function renderData(page) {
         async function fetchResult() {
-             let result = await fetch("http://localhost:8000/api/list");
+            let result = await fetch("http://localhost:8000/api/list?page=" + page);
             result = await result.json();
-            setData(result);
+            setData(result.data);
+            setLastpage(result.last_page)
         }
        fetchResult();
+    }
+
+    function nextPage() {
+        if(currentPage < lastPage) {
+            setCurrentpage(currentPage + 1);
+        }
+    }
+
+    function previousPage() {
+        if(currentPage > 1) {
+            setCurrentpage(currentPage - 1);
+        }
     }
 
 
@@ -65,6 +85,15 @@ function ProductList() {
                     </tbody>
                 
                 </Table>
+                <div className="pagination">
+                    <button className="btn btn-primary" onClick={previousPage} disabled={currentPage===1}>Previous</button>
+                    {
+                        numsPages.map((num) => {
+                            return <button key={num} className={currentPage === num ? "btn btn-primary" : "btn btn-outline-primary"} disabled={num === currentPage} onClick={() =>setCurrentpage(num)}>{num}</button>
+                        })
+                    }
+                    <button className="btn btn-primary" onClick={nextPage} disabled={currentPage===lastPage}>Next</button>
+                </div>
             </div>
             
         </>

@@ -1,3 +1,8 @@
+.currentPage {
+    background-color: #0d6efd;
+    
+}
+
 
 .form-update {
     margin-top: 30px;
@@ -22,3 +27,14 @@
 .options-td > *{
     margin-left: 20px;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.pagination button{
+    margin-left: 20px;
+}
+
