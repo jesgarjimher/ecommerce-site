@@ -30,7 +30,7 @@ function AddProduct() {
     return(
         <>
             <Header/>
-            <div className="col-sm-6 offset-sm-3">
+            <div className="col-sm-6 offset-sm-3 component-container">
                 <br></br>
                 <input type="text" className="form-control" onChange={(e) => setName(e.target.value)} placeholder="Name"/>
                 <br></br>
@@ -39,7 +39,7 @@ function AddProduct() {
                 <input type="text" className="form-control" onChange={(e) => setPrice(e.target.value)} placeholder="price"/>
                 <br></br>
                 <input type="description" className="form-control" onChange={(e) => setDescription(e.target.value)} placeholder="Description"/>
-                <button className="btn btn-primary" onClick={addProduct} >Add Product</button>
+                <button className="btn btn-primary btn-add" onClick={addProduct} >Add Product</button>
                 
             </div>
         </>

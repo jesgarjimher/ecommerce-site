@@ -1,3 +1,25 @@
+.btn-add {
+    margin-top: 20px;
+}
+
+.component-container {
+    margin-top: 50px;
+}
+#container-img-product {
+    width: 30%;
+    height: 100%;
+    /*overflow: hidden;*/
+    object-fit: cover;
+
+}
+
+#container-img-product  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 .currentPage {
     background-color: #0d6efd;
     
@@ -19,6 +41,15 @@
     width: 100px;
 }
 
+.input-search {
+    margin: 20px auto;
+}
+
+.link-name {
+    text-decoration: none;
+    color: #0d6efd;
+}
+
 .navbar_wrapper a{
     padding-left: 30px;
     text-decoration: none;
@@ -36,5 +67,39 @@
 
 .pagination button{
     margin-left: 20px;
+}
+
+.product-card {
+    display: flex;
+    height: 300px;
+    border: solid 2px #0d6efd;
+    border-radius: 4px;
+    margin-top: 10%;
+    
+}
+
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 70%;
+    padding: 20px 40px;
+}
+
+.product-btns {
+    display: flex;
+    justify-content: end;
+    margin-right: 20px;
+}
+
+.product-btns a{
+    margin-left: 20px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 5%;
+    color: #0d6efd;
 }
 

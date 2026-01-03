@@ -7,6 +7,7 @@ import AddProduct from "./views/AddProduct"
 import Protected from "./views/Protected"
 import ProductList from './views/ProductList';
 import SearchProduct from './views/SearchProduct';
+import Product from './views/Product';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/addproduct" element={<Protected component={AddProduct}/>} />
           <Route path='/' element={<Protected component={ProductList}/> } />
           <Route path='/search' element={<Protected component={SearchProduct}/> } />
-
+          <Route path="/product/:id" element={<Protected component={Product}/> } />
         </Routes>
         
       </BrowserRouter>

@@ -26,10 +26,10 @@ function SearchProduct() {
     return(
         <>
             <Header/>
-            <div className="col-sm-6 offset-sm-3">
-               <h1>Search product</h1>
-               <br></br>
-               <input type="text" className="form-control" onChange={(e) => search(e.target.value)}></input>
+            <div className="col-sm-6 offset-sm-3 component-container">
+               <h1 className="title">Search all products</h1>
+              
+               <input type="text" className="form-control input-search" onChange={(e) => search(e.target.value)}></input>
             </div>
 
              <div className="col-sm-8 offset-sm-2">
