@@ -50,6 +50,10 @@
     color: #0d6efd;
 }
 
+.login-reg {
+    margin-top: 20px;
+}
+
 .navbar_wrapper a{
     padding-left: 30px;
     text-decoration: none;
@@ -99,7 +103,7 @@
 
 .title {
     text-align: center;
-    margin-top: 5%;
+    margin: 30px auto;
     color: #0d6efd;
 }
 

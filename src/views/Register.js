@@ -44,7 +44,7 @@ function Register() {
             <input type="password" value={password} className="form-control" onChange={(e) => setPassword(e.target.value)} placeholder="password"></input>
             <br></br>
             <input type="text" value={email} className="form-control" onChange={(e) => setEmail(e.target.value)} placeholder="email"></input>
-            <button className="btn btn-primary" onClick={signUp}>Sign up</button>
+            <button className="btn btn-primary login-reg" onClick={signUp}>Sign up</button>
         </div>
         </>
         

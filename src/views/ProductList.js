@@ -53,7 +53,8 @@ function ProductList() {
     return(
         <>
             <Header />
-            <h1>Product List </h1>
+                            
+            <h1 className="title">All products</h1>
             <div className="col-sm-8 offset-sm-2">
                 <Table>
                     <thead>

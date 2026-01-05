@@ -46,7 +46,7 @@ function AddProduct() {
         <>
             <Header/>
             <div className="col-sm-6 offset-sm-3 component-container">
-                <br></br>
+                <h1 className="title">Add a product</h1>
                 <input type="text" className="form-control" onChange={(e) => setName(e.target.value)} placeholder="Name"/>
                 {errors.name && <span className="text-danger">{errors.name[0]}</span>}
                 <br></br>

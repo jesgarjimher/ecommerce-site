@@ -38,8 +38,8 @@ function Login() {
                 <input type="text" onChange={(e) => setEmail(e.target.value)} placeholder="email" className="form-control"></input>
             <br/>
             <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="password" className="form-control"></input>
-            <br/>
-            <button onClick={login} className="btn btn-primary">Login</button>
+            
+            <button onClick={login} className="btn btn-primary login-reg">Login</button>
             </div>
         </>
         

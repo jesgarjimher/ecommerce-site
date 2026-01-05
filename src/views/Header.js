@@ -19,7 +19,7 @@ function Header() {
         <div>
             <Navbar bg="dark" data-bs-theme="dark">
                 <Container>
-                    <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                    <Navbar.Brand href="#home">Ecommerce-JG</Navbar.Brand>
                     <Nav className="me-auto navbar_wrapper">
                         {
                             localStorage.getItem("user-info") ?

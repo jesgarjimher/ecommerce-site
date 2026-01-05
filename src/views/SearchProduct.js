@@ -49,10 +49,10 @@ function SearchProduct() {
                         data.map((item) => 
                             <tr key={item.id}>
                                 <td>{item.id}</td>
-                                <td>{item.name}</td>
+                                <td><Link to={"/product/" + item.id} className="link-name">{item.name}</Link></td>
                                 <td>{item.price}</td>
                                 <td>{item.description}</td>
-                                <td><img className="img-product" src={"http://localhost:8000/storage/" + item.file_path} alt={`Photography of ${item.description}`}></img>{}</td>
+                                <td><Link to={"/product/" + item.id}><img className="img-product" src={"http://localhost:8000/storage/" + item.file_path} alt={`Photography of ${item.description}`}></img></Link></td>
                                 <td className="options-td">
                                     <button className="btn btn-danger" onClick={() => deleteOperation(item.id)}>Delete</button>
                                     <Link className="btn btn-secondary"  to={"/updateproduct/" + item.id}>Edit</Link>
