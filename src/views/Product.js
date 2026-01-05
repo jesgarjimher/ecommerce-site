@@ -8,14 +8,26 @@ function ProductList() {
 
     const [data,setData] = useState([]);
     const {id} = useParams();
+    const [errors,setErrors] = useState(null)
 
     useEffect(() => {
         async function fetchData() {
-            let result = await fetch("http://localhost:8000/api/product/" + id);
-            result = await result.json();
-            setData(result);
-            console.log("result ",result)
-            console.log("data",data)
+            try {
+                let result = await fetch("http://localhost:8000/api/product/" + id);
+                
+                if(!result.ok) {
+                    throw new Error("Product doesn't exist");
+                }
+                
+                result = await result.json();
+                setData(result);
+
+                console.log("result ",result)
+                console.log("data",data)
+            }catch(error) {
+                setErrors(error);
+            }
+            
         }
         fetchData();
         
@@ -31,6 +43,19 @@ function ProductList() {
 
 
  
+    if(errors) 
+        return (
+        <>
+            <Header />
+            <div className="alert alert-danger window-error">
+                <p>⚠️ {errors.message}</p>
+                <Link to="/">&#8617; Return to see all the products</Link>
+            </div>
+        </>
+            
+        )
+    
+
     return(
         <>
             <Header />
