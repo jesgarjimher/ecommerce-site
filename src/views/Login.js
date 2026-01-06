@@ -33,8 +33,8 @@ function Login() {
     return(
         <>
             <Headers/>
-            <div className="col-sm-6 offset-sm-3">
-                <h1>Login page</h1>
+            <div className="col-sm-2 offset-sm-4">
+                <h1 className="title">Login page</h1>
                 <input type="text" onChange={(e) => setEmail(e.target.value)} placeholder="email" className="form-control"></input>
             <br/>
             <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="password" className="form-control"></input>

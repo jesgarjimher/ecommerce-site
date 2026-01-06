@@ -37,8 +37,8 @@ function Register() {
     return(
         <>
         <Headers/>
-        <div className="col-sm-6 offset-sm-3">
-            <h1>Register</h1>
+        <div className="col-sm-2 offset-sm-4">
+            <h1 className="title">Register</h1>
             <input type="text" value={name} className="form-control" onChange={(e) => setName(e.target.value)} placeholder="name"></input>
             <br></br>
             <input type="password" value={password} className="form-control" onChange={(e) => setPassword(e.target.value)} placeholder="password"></input>

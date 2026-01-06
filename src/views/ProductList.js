@@ -8,6 +8,7 @@ function ProductList() {
     const [data,setData] = useState([]);
     const [currentPage,setCurrentpage] = useState(1);
     const [lastPage, setLastpage] = useState(1);
+    const [errors,setErrors] = useState(null);
 
     const numsPages = [];
     for(let i = 1; i <= lastPage; i++) {
@@ -26,14 +27,22 @@ function ProductList() {
         renderData(currentPage);
     }
 
-    function renderData(page) {
-        async function fetchResult() {
+    async function renderData(page) {
+        try {
+            setErrors(null);
             let result = await fetch("http://localhost:8000/api/list?page=" + page);
+            
+            if(!result.ok) {
+                throw new Error("Error al conectarse al servidor");
+            }
+            
             result = await result.json();
             setData(result.data);
             setLastpage(result.last_page)
+        }catch(error){
+            setErrors(error.message);
         }
-       fetchResult();
+        
     }
 
     function nextPage() {
@@ -56,49 +65,57 @@ function ProductList() {
                             
             <h1 className="title">All products</h1>
             <div className="col-sm-8 offset-sm-2">
-                <Table>
-                    <thead>
-                        <tr>
-                            <td>ID</td>
-                            <td>Name</td>
-                            <td>Price</td>
-                            <td>Description</td>
-                            <td>Image</td>
-                            <td>Operations</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                        data.map((item) => 
-                           
-                                <tr key={item.id}>
-                                    <td>{item.id}</td>
-                                    <td><Link to={"/product/"+ item.id} className="link-name">{item.name}</Link></td>
-                                    <td>{item.price}</td>
-                                    <td>{item.description}</td>
-                                    <td><Link to={"/product/"+ item.id}><img className="img-product" src={"http://localhost:8000/storage/" + item.file_path} alt={`Photography of ${item.description}`}></img></Link></td>
-                                    <td className="options-td">
-                                        <button className="btn btn-danger" onClick={() => deleteOperation(item.id,currentPage)}>Delete</button>
-                                        <Link className="btn btn-secondary"  to={"updateproduct/" + item.id}>Edit</Link>
-                                        </td>
-                                </tr>
-                            
-                            
-                        )
-                        }
-                    </tbody>
+
+                {errors && (
+                    <div className="alert alert-danger">
+                        <h2>There was a problem loading this site</h2>
+                        <p>{errors}</p>
+                        <button className="btn btn-outline-danger" onClick={() =>renderData(currentPage)}>Try loading again</button>
+                    </div>
+                )}
+
+                {!errors && (
+                    <><Table>
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Name</td>
+                                <td>Price</td>
+                                <td>Description</td>
+                                <td>Image</td>
+                                <td>Operations</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map((item) => <tr key={item.id}>
+                                <td>{item.id}</td>
+                                <td><Link to={"/product/" + item.id} className="link-name">{item.name}</Link></td>
+                                <td>{item.price}</td>
+                                <td>{item.description}</td>
+                                <td><Link to={"/product/" + item.id}><img className="img-product" src={"http://localhost:8000/storage/" + item.file_path} alt={`Photography of ${item.description}`}></img></Link></td>
+                                <td className="options-td">
+                                    <button className="btn btn-danger" onClick={() => deleteOperation(item.id, currentPage)}>Delete</button>
+                                    <Link className="btn btn-secondary" to={"updateproduct/" + item.id}>Edit</Link>
+                                </td>
+                            </tr>
+
+
+                            )}
+                        </tbody>
+
+                    </Table><div className="pagination">
+                            <button className="btn btn-primary" onClick={previousPage} disabled={currentPage === 1}>Previous</button>
+                            {numsPages.map((num) => {
+                                return <button key={num} className={currentPage === num ? "btn btn-primary" : "btn btn-outline-primary"} disabled={num === currentPage} onClick={() => setCurrentpage(num)}>{num}</button>;
+                            })}
+                            <button className="btn btn-primary" onClick={nextPage} disabled={currentPage === lastPage}>Next</button>
+                        </div>
+                        
+                        </>
+            
+                )}
                 
-                </Table>
-                <div className="pagination">
-                    <button className="btn btn-primary" onClick={previousPage} disabled={currentPage===1}>Previous</button>
-                    {
-                        numsPages.map((num) => {
-                            return <button key={num} className={currentPage === num ? "btn btn-primary" : "btn btn-outline-primary"} disabled={num === currentPage} onClick={() =>setCurrentpage(num)}>{num}</button>
-                        })
-                    }
-                    <button className="btn btn-primary" onClick={nextPage} disabled={currentPage===lastPage}>Next</button>
                 </div>
-            </div>
             
         </>
         
