@@ -15,11 +15,21 @@ function SearchProduct() {
     }
 
      async function deleteOperation(id) {
-        let result = await fetch("http://localhost:8000/api/delete/" + id, {
-            method: "DELETE"
-        });
-        result = await result.json();
-        search();
+        if(window.confirm("DO you really want to delete this product?")) {
+            try {
+                let result = await fetch("http://localhost:8000/api/delete/" + id, {
+                    method: "DELETE"
+                    });
+                if(!result.ok) {
+                    const dataError = new Error(dataError.message);
+                }
+                alert("The product has been deleted");
+                search();
+            }catch(error) {
+                alert("Error: " + error.message);
+            }
+        }
+        
     }
     
     

@@ -20,10 +20,30 @@ function ProductList() {
     },[currentPage])
 
     async function deleteOperation(id,currentPage) {
-        let result = await fetch("http://localhost:8000/api/delete/" + id, {
-            method: "DELETE"
-        });
-        result = await result.json();
+        if(window.confirm("Do you really want to delete this product?")) {
+            try {
+                let result = await fetch("http://localhost:8000/api/delete/" + id, {
+                method: "DELETE"
+            });
+
+            if(!result.ok) {
+                const dataError = await result.json();
+                throw new Error(dataError.message);
+            }
+
+            alert("The product has been deleted");
+            renderData(currentPage);
+            }catch(error) {
+                alert("Error " + error.message);
+            }
+        }
+
+
+
+
+
+        
+        
         renderData(currentPage);
     }
 
@@ -114,7 +134,7 @@ function ProductList() {
                         </>
             
                 )}
-                
+
                 </div>
             
         </>
