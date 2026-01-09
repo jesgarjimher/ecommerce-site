@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import Header from "./Header";
 import {useState} from "react";
 import { Table } from "react-bootstrap";
@@ -6,6 +6,7 @@ import { Table } from "react-bootstrap";
 function SearchProduct() {
 
     const [data,setData] = useState([]);
+    const navigate = useNavigate();
 
     async function search(key) {
         let result = await fetch("http://localhost:8000/api/search/" + key);
@@ -15,18 +16,21 @@ function SearchProduct() {
     }
 
      async function deleteOperation(id) {
-        if(window.confirm("DO you really want to delete this product?")) {
+        if(window.confirm("Do you really want to delete this product?")) {
             try {
                 let result = await fetch("http://localhost:8000/api/delete/" + id, {
                     method: "DELETE"
                     });
                 if(!result.ok) {
-                    const dataError = new Error(dataError.message);
+                    const dataError = await result.json();
+                    throw new Error(dataError.message);
                 }
                 alert("The product has been deleted");
-                search();
+                
             }catch(error) {
                 alert("Error: " + error.message);
+                alert("olaa")
+                search(null)
             }
         }
         
