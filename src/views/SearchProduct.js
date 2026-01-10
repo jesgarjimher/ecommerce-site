@@ -1,4 +1,4 @@
-import { Link,useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Header from "./Header";
 import {useState} from "react";
 import { Table } from "react-bootstrap";
@@ -6,13 +6,27 @@ import { Table } from "react-bootstrap";
 function SearchProduct() {
 
     const [data,setData] = useState([]);
-    const navigate = useNavigate();
+    const [errors, setErrors] = useState(null);
 
     async function search(key) {
-        let result = await fetch("http://localhost:8000/api/search/" + key);
-        result = await result.json();
-        console.log(key)
-        setData(result);
+        if(!key) {
+            setData([]);
+            setErrors(null);
+            return
+        }
+        try {
+            setErrors(null);
+            let result = await fetch("http://localhost:8000/api/search/" + key);
+
+            if(!result.ok) {
+                throw new Error("Error connecting to the server")
+            }
+            result = await result.json()
+            setData(result);
+        }catch(error) {
+            setErrors(error.message)
+            setData([]);
+        }
     }
 
      async function deleteOperation(id) {
@@ -29,7 +43,6 @@ function SearchProduct() {
                 
             }catch(error) {
                 alert("Error: " + error.message);
-                alert("olaa")
                 search(null)
             }
         }
@@ -47,36 +60,51 @@ function SearchProduct() {
             </div>
 
              <div className="col-sm-8 offset-sm-2">
-                <Table>
-                    <thead>
-                        <tr>
-                            <td>ID</td>
-                            <td>Name</td>
-                            <td>Price</td>
-                            <td>Description</td>
-                            <td>Image</td>
-                            <td>Operations</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                        data.map((item) => 
-                            <tr key={item.id}>
-                                <td>{item.id}</td>
-                                <td><Link to={"/product/" + item.id} className="link-name">{item.name}</Link></td>
-                                <td>{item.price}</td>
-                                <td>{item.description}</td>
-                                <td><Link to={"/product/" + item.id}><img className="img-product" src={"http://localhost:8000/storage/" + item.file_path} alt={`Photography of ${item.description}`}></img></Link></td>
-                                <td className="options-td">
-                                    <button className="btn btn-danger" onClick={() => deleteOperation(item.id)}>Delete</button>
-                                    <Link className="btn btn-secondary"  to={"/updateproduct/" + item.id}>Edit</Link>
-                                    </td>
-                            </tr>
-                        )
-                        }
-                    </tbody>
+                {!errors && (
+
                 
-                </Table>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Name</td>
+                                <td>Price</td>
+                                <td>Description</td>
+                                <td>Image</td>
+                                <td>Operations</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                            data.map((item) => 
+                                <tr key={item.id}>
+                                    <td>{item.id}</td>
+                                    <td><Link to={"/product/" + item.id} className="link-name">{item.name}</Link></td>
+                                    <td>{item.price}</td>
+                                    <td>{item.description}</td>
+                                    <td><Link to={"/product/" + item.id}><img className="img-product" src={"http://localhost:8000/storage/" + item.file_path} alt={`Photography of ${item.description}`}></img></Link></td>
+                                    <td className="options-td">
+                                        <button className="btn btn-danger" onClick={() => deleteOperation(item.id)}>Delete</button>
+                                        <Link className="btn btn-secondary"  to={"/updateproduct/" + item.id}>Edit</Link>
+                                        </td>
+                                </tr>
+                            )
+                            }
+                        </tbody>
+                    
+                    </Table>
+                )}
+                {!errors && data.length > 0 &&(
+                    <div>
+                        <h1>There are no matches</h1>
+                    </div>
+                )}
+
+                {errors && (
+                    <div className="alert alert-danger">
+                        <p>An error happened: {errors}</p>
+                    </div>
+                )}
             </div>
         </>
         

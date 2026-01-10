@@ -53,7 +53,7 @@ function ProductList() {
             let result = await fetch("http://localhost:8000/api/list?page=" + page);
             
             if(!result.ok) {
-                throw new Error("Error al conectarse al servidor");
+                throw new Error("Error connecting to the server");
             }
             
             result = await result.json();
