@@ -59,6 +59,10 @@
     text-decoration: none;
 }
 
+.no-matches-msg {
+    text-align: center;
+}
+
 .options-td > *{
     margin-left: 20px;
 }

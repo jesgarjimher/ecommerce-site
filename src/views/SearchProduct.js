@@ -7,16 +7,19 @@ function SearchProduct() {
 
     const [data,setData] = useState([]);
     const [errors, setErrors] = useState(null);
+    const [inputContent, setInputcontent] = useState("");
 
     async function search(key) {
-        if(!key) {
+        let query = key.trim();
+        setInputcontent(query);
+        if(!query) {
             setData([]);
             setErrors(null);
             return
         }
         try {
             setErrors(null);
-            let result = await fetch("http://localhost:8000/api/search/" + key);
+            let result = await fetch("http://localhost:8000/api/search/" + query);
 
             if(!result.ok) {
                 throw new Error("Error connecting to the server")
@@ -94,8 +97,8 @@ function SearchProduct() {
                     
                     </Table>
                 )}
-                {!errors && data.length > 0 &&(
-                    <div>
+                {!errors && data.length === 0 && inputContent.length != 0 &&(
+                    <div className="no-matches-msg">
                         <h1>There are no matches</h1>
                     </div>
                 )}
