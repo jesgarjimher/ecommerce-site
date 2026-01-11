@@ -22,10 +22,9 @@ function ProductList() {
                 }
                 
                 result = await result.json();
-                setData(result);
+                setData(result.data);
 
-                console.log("result ",result)
-                console.log("data",data)
+                console.log("result ",result.data)
             }catch(error) {
                 setErrors(error);
             }

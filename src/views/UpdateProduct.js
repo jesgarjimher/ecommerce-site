@@ -78,7 +78,7 @@ function UpdateProduct() {
         <>
             <Header/>
             <div className="col-sm-4 offset-sm-3 form-update">
-                <h1>Update product</h1>
+                <h1 className="title">Update product</h1>
                 {
                     errors && (
                         <div className="alert alert-danger">
